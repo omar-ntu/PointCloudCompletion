@@ -1,5 +1,11 @@
 # Diffusion Model for 3D Point Cloud Completion
 
+<i>Can a diffusion model recover missing 3D geometry from partial point-cloud observations?</i>
+
+<img width="756" height="250" alt="sample_completion_triplet" src="https://github.com/user-attachments/assets/f8d09e41-8d98-47b3-8287-979b303928cb" />
+<img width="756" height="250" alt="demo_completion_triplet" src="https://github.com/user-attachments/assets/6202ad2f-7cf0-4180-b78c-50ad08f02d85" />
+
+
 This project implements a compact research prototype for completing partial 3D point clouds using three progressively stronger approaches:
 
 1. **Autoencoder baseline**: encodes a partial point cloud and decodes a complete point cloud.
@@ -7,10 +13,6 @@ This project implements a compact research prototype for completing partial 3D p
 3. **Conditional latent diffusion model**: denoises full-shape latents conditioned on partial point-cloud observations.
 
 The default dataset is synthetic and generated from analytical 3D shapes: spheres, cubes, and cylinders. This makes the project runnable without downloading ShapeNet, ModelNet40, ScanNet, or other large datasets. The code structure is designed so the dataset can be replaced with real partial/full point-cloud pairs later.
-
-## Project question
-
-Can a diffusion model recover missing 3D geometry from partial point-cloud observations?
 
 ## Repository structure
 
@@ -147,17 +149,3 @@ The synthetic dataset returns:
 ```
 
 All point clouds are centred and normalised to fit approximately inside a unit sphere.
-
-## How to extend this project
-
-Good next steps:
-
-1. Replace the synthetic dataset with ShapeNet, ModelNet40, MVP, PCN, or ScanNet partial/full pairs.
-2. Use a stronger point-cloud encoder such as PointNet++, DGCNN, Point Transformer, or Point-BERT.
-3. Add category conditioning or text conditioning.
-4. Diffuse multiple candidate completions and rank them using Chamfer Distance, learned realism scores, or a VLM/geometric plausibility metric.
-5. Add local refinement after diffusion using a folding decoder or upsampling module.
-
-## Limitations
-
-This ZIP contains a complete runnable implementation, but the default dataset is intentionally simple. It validates the completion pipeline and provides a clean base for experimentation. To make research-level claims, train and evaluate on a real benchmark such as ShapeNet/PCN or ScanNet partial scans.
